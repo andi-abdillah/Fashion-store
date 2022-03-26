@@ -48,30 +48,36 @@ table {
 
 $fontfamily :-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 $headfontsize : 30px;
+$container : 1280px;
+$footercolor : rgb(221, 221, 221);
 
+body{
+    max-width: $container;
+    margin: auto;
+}
 nav{
+    display: flex;
+    flex-direction: row;
     padding: 40px;
+    width: $container;
     font-family: $fontfamily;
     background-color: rgb(255, 255, 255);
-    display: grid;
-    grid-template-columns: 40% 40% 20%;
-    grid-template-rows: auto;
-    grid-template-areas: "title navlink navbutton";
-
     .title{
+        width: 40%;
         padding-left: 40px;
         color: rgb(19, 19, 19);
         font-size: 50px;
         font-weight: bold;
         text-decoration:none;
-        grid-area: title;
+        box-sizing: border-box;
     }
     ul{
-        grid-area: navlink;
+        width: 35%;
         font-size: 20px;
         font-family: $fontfamily;
         font-weight: bold;
         padding-top: 20px;
+        box-sizing: border-box;
         li{
             display: inline-block;
             margin-left: 5%;
@@ -82,32 +88,34 @@ nav{
                 background:
                 linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0)),
                 linear-gradient(to right, rgb(255, 255, 255));
-                background-size: 0 0.1em, 100% 0.1em;
+                background-size: 0 0.15em, 100% 0.1em;
                 background-position: 100% 100%, 0 100%;
                 background-repeat: no-repeat;
                 transition: background-size 400ms;
             }
             a:hover{
-                background-size: 100% 0.1em, 0 0.1em;
+                background-size: 100% 0.15em, 0 0.1em;
             }
         }
        
     }
     .navbutton{
-        grid-area: navbutton;
+        width: 25%;
         button{
             font-family: $fontfamily;
             font-size: 15px;
             font-weight: bold;
-            background: #22a4cf;
+            background: #000000;
             color: white;
             border: white 0px solid;
             border-radius: 5px;
             padding: 12px 20px;
-            margin-top: 10px;
+            margin: 10px 15px 0px 0px;
+            box-sizing: border-box;
         }
         button:hover{
             opacity:0.8;
+            cursor: pointer;
         }
     }
 }
@@ -115,23 +123,28 @@ nav{
     background-image: url(./assets/jumbotron.jpg);
     background-size: cover;
     background-position: 300px 0px;
-    width: 100%;
+    width: $container;
     height: 350px;
     .content{
-        padding: 50px;
+        padding: 40px;
         width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
         h2{
+            height: 40%;
             font-family: $fontfamily;
             font-size: $headfontsize;
             font-weight: bold;
         }
         p{
-            padding-top: 10%;
+            height: 40%;
             font-family: $fontfamily;
             font-size: 20px;
         }
         .button{
-            padding-top: 5%;
+            height: 20%;
             button{
                 font-family: $fontfamily;
                 font-size: 15px;
@@ -144,6 +157,7 @@ nav{
             }
             button:hover{
                 opacity:0.8;
+                cursor: pointer;
             }
         }
 
@@ -151,66 +165,259 @@ nav{
     
 }
 .main{
-    margin: 40px;
+    width: $container;
+    margin-top: 40px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     h2{
         color: rgb(19, 19, 19);
-        font-size: $headfontsize;
+        font-family: $fontfamily;
+        font-size: 50px;
         font-weight: bold;
-        text-decoration:none;
-        grid-area: title;
-
+        text-transform: uppercase;
     }
     .container{
-        width: 100%;
+        width: 90%;
         display: flex;
         flex-wrap: wrap;
         margin-top: 50px;
         justify-content: space-evenly;
         .card{
-            width: 350px;
-            height: 500px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            height: 350px;
             border-radius: 5px;
-            margin-bottom: 100px;
+            margin-bottom: 50px;
             img{
                 width: 100%;
-                height: 350px;
+                height: 300px;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0);
+                transition: 0.3s;
             }
             h3{
-                height: 30px;
-                padding-top: 1rem;
+                height: auto;
                 color: rgb(19, 19, 19);
                 font-family: $fontfamily;
                 font-weight: bold;
+                padding: 20px;
+                box-sizing: border-box;
             }
-            p{
-                height: 80px;
-                line-height: 1.3;
-                padding-top: 1rem;
-                color: rgb(19, 19, 19);
-                font-family: $fontfamily;
-                font-size: medium;
-            }
-            .card-button{
-                height: 40px;
+            .cardhover{
+                position: absolute;
+                height: 300px;
                 width: 100%;
-                display: inline-flex;
-                justify-content: space-between;
-                align-items: flex-end;
-                a{
+                opacity: 0;
+                display: flex;
+                align-items: center;
+                p{
+                    height: 50%;
+                    line-height: 1.7;
+                    color: rgb(255, 255, 255);
                     font-family: $fontfamily;
-                    font-size: 15px;
-                    font-weight: bold;
-                    background: #000000;
-                    color: white;
-                    border: white 0px solid;
-                    padding: 10px 10px;
-
+                    font-size: medium;
+                    padding: 20px;
+                    box-sizing: border-box;
                 }
+                .card-button{
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    display: inline-flex;
+                    justify-content: space-between;
+                    a{
+                        font-family: $fontfamily;
+                        font-size: 15px;
+                        font-weight: bold;
+                        background: #000000;
+                        color: white;
+                        padding: 10px 10px;
+                    }
+                    a:hover{
+                        cursor: pointer;
+                    }
+                }
+            }
+            .cardhover:hover{
+                opacity: 1;
+                background-color: rgba(0, 0, 0, 0.6);
             }
         }
 
     }
     
+}
+.about{
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+    width: $container;
+    img{
+        width: 50%;
+        box-sizing: border-box;
+    }
+    div{
+        display: flex;
+        flex-direction: column;
+        margin: 0% 5%;
+        box-sizing: border-box;
+        align-items: center;
+        h2{
+            height: 20%;
+            color: rgb(19, 19, 19);
+            font-family: $fontfamily;
+            font-size: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        p{
+            height: 70%;
+            color: rgb(19, 19, 19);
+            font-family: $fontfamily;
+            font-size: 14px;
+            line-height: 1.5;
+            font-weight: bold;
+            text-align: justify;
+            text-indent: 50px;
+            text-transform: capitalize;
+        }
+        button{
+            width: 40%;
+            height: auto;
+            font-family: $fontfamily;
+            font-size: 15px;
+            font-weight: bold;
+            background: #000000;
+            color: white;
+            border: white 0px solid;
+            padding: 12px 20px;
+        }
+    }
+}
+.contact{
+    width: $container;
+    padding: 50px;
+    margin-top: 50px;
+    box-sizing: border-box;
+    background-color: #000000;
+    div{
+        display: flex;
+        flex-direction: row;
+        padding: 40px;
+        box-sizing: border-box;
+        align-items: center;
+        font-family: $fontfamily;
+        h3{
+            width: 60%;
+            color: $footercolor;
+            font-size: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        form{
+            display: flex;
+            flex-direction: row;
+            width: 40%;
+            height: 100%;
+            input[type=text]{
+                text-align: center;
+                width: 80%;
+                height: 50px;
+                font-weight: bold;
+                color: $footercolor;
+                border: none;
+                background: #000000;
+                border: 1px solid $footercolor;
+            }
+            input[type=submit]{
+                width: 20%;
+                text-align: center;
+                font-size: 15px;
+                font-weight: bold;
+                background: #000000;
+                color: $footercolor;
+                border: 1px solid $footercolor;
+            }
+            input[type=submit]:hover{
+                cursor: pointer;
+                color: black;
+                background: $footercolor;
+            }
+        }
+    }
+}
+
+footer{
+    width: $container;
+    height: 400px;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2{
+        height: 100px;
+        color: rgb(255, 255, 255);
+        font-family: $fontfamily;
+        font-size: $headfontsize;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    div{
+        height: 200px;
+        display: flex;
+        padding: auto;
+        box-sizing: border-box;
+        .content{
+            width: 40%;
+            color: $footercolor;
+            font-family: $fontfamily;
+            font-size: 20px;
+            text-align: justify;
+            text-indent: 50px;
+            line-height: 1.5;
+            text-transform: capitalize;
+            padding-left: 150px;
+            box-sizing: border-box;
+        }
+        .footer-link{
+            width: 60%;
+            display: flex;
+            flex-direction: row;
+            width: 50%;
+            margin: 0 auto 0 20%;
+            box-sizing: border-box;
+            ul{
+                li{
+                    margin: 0px 20px;
+                    font-family: $fontfamily;
+                    font-size: 15px;
+                    font-weight: bold;
+                    color: $footercolor;
+                    padding: 10px 0px;
+                    a{
+                        color: $footercolor;
+                        text-decoration: none;
+                    }
+                    a:hover{
+                        opacity: 0.6;
+                    }
+                }
+            }
+        }
+    }
+    .copyright{
+        height: 100px;
+        text-align: center;
+        font-family: $fontfamily;
+        font-size: 20px;
+        width: $container;
+        color: $footercolor;
+        background-color: #000000;
+        margin-top: 50px;
+        box-sizing: border-box;
+    }
 }
